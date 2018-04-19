@@ -14,7 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<!-- mvn打jar包，默认只会把java工程的java文件打进包里，如果想将工程依赖第三方的jar包也一起打进来，使用以下命令 -->
 	<build>
 		<plugins>
 			<plugin>
@@ -26,32 +25,42 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<!-- mvn打jar包，默认只会把java工程的java文件打进包里，如果想将工程依赖第三方的jar包也一起打进来，使用以下命令 shade -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
+				<version>3.0.0</version> <executions> <execution> <phase>package</phase> 
+				<goals> <goal>shade</goal> </goals> <configuration> <transformers> <transformer 
+				implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> 
+				<resource>META-INF/spring.handlers</resource> </transformer> <transformer 
+				implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> 
+				<resource>META-INF/spring.schemas</resource> </transformer> <transformer 
+				implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> 
+				<resource>META-INF/spring.tooling</resource> </transformer> </transformers> 
+				</configuration> </execution> </executions> </plugin> -->
+			<!-- 使用该插件打出一个可以直接执行的jar包 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+				<configuration> <classesDirectory>target/classes/</classesDirectory> <archive> 
+				<manifest> 主函数的入口 <mainClass>com.yzb808.main.MainClass</mainClass> 打包时 MANIFEST.MF文件不记录的时间戳版本 
+				<useUniqueVersions>false</useUniqueVersions> <addClasspath>true</addClasspath> 
+				<classpathPrefix>lib/</classpathPrefix> </manifest> <manifestEntries> <Class-Path>.</Class-Path> 
+				</manifestEntries> </archive> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-dependency-plugin</artifactId> <executions> <execution> 
+				<id>copy-dependencies</id> <phase>package</phase> <goals> <goal>copy-dependencies</goal> 
+				</goals> <configuration> <type>jar</type> <includeTypes>jar</includeTypes> 
+				<useUniqueVersions>false</useUniqueVersions> <outputDirectory> ${project.build.directory}/lib 
+				</outputDirectory> </configuration> </execution> </executions> </plugin> -->
+			<!-- spring插件会自动扫描应用目录下的main方法,这一点很方便 -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.0.0</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- 对于有多个main方法的情况,使用以下参数显式指定 -->
+				<configuration>
+					<mainClass>com.yzb808.main.MainClass</mainClass>
+				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
 						<goals>
-							<goal>shade</goal>
+							<goal>repackage</goal>
 						</goals>
-						<configuration>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.handlers</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.schemas</resource>
-								</transformer>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-									<resource>META-INF/spring.tooling</resource>
-								</transformer>
-							</transformers>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -71,5 +80,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.22</version>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-loader</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 </project>
