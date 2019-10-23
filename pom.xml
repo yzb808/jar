@@ -104,7 +104,7 @@
 			<!-- 随后在springboot 自己main方法的逻辑中，再初始化用户依赖lib，最后回调用户main。 -->
 			<!-- 使用 spring-boot-maven-plugin 插件打独立可运行的jar包最方便，该插件可以自动查找包含main方法的类，也可以由用户显式指定。 -->
 			<!-- 打包出来的jar可以被直接执行，用户class和依赖的jar包目录也很清晰。但需要注意的一点，这种启动方式改变了默认的classLoader。 -->
-			<plugin>
+			<!--<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -117,7 +117,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 
