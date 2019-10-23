@@ -120,12 +120,16 @@
 			<!-- 随后在springboot 自己main方法的逻辑中，再初始化用户依赖lib，最后回调用户main。 -->
 			<!-- 使用 spring-boot-maven-plugin 插件打独立可运行的jar包最方便，该插件可以自动查找包含main方法的类，也可以由用户显式指定。 -->
 			<!-- 打包出来的jar可以被直接执行，用户class和依赖的jar包目录也很清晰。但需要注意的一点，这种启动方式改变了默认的classLoader。 -->
+<<<<<<< HEAD
 			<!-- <plugin>
+=======
+			<!--<plugin>
+>>>>>>> 3bcd6a486c8a440e0ebf2671b454f10d8d38d492
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.0.4.RELEASE</version>
 				<configuration>
-					<mainClass>com.yzb808.main.MainClass</mainClass>
+					<mainClass>com.yzb808.main.HbaseWriteService</mainClass>
 				</configuration>
 				<executions>
 					<execution>
@@ -134,7 +138,11 @@
 						</goals>
 					</execution>
 				</executions>
+<<<<<<< HEAD
 			</plugin> -->
+=======
+			</plugin>-->
+>>>>>>> 3bcd6a486c8a440e0ebf2671b454f10d8d38d492
 		</plugins>
 	</build>
 
@@ -162,6 +170,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-loader</artifactId>
 			<version>2.0.1.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase-client</artifactId>
+			<version>0.98.7-hadoop2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jdk.tools</groupId>
+			<artifactId>jdk.tools</artifactId>
+			<version>1.7</version>
+			<scope>system</scope>
+			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
 		</dependency>
 
 		
