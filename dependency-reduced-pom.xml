@@ -41,6 +41,17 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <classesDirectory>target/classes/</classesDirectory>
+          <archive>
+            <manifest>
+              <mainClass>com.yzb808.main.MainClass</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
